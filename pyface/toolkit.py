@@ -34,37 +34,8 @@ def _init_toolkit():
         return be
 
     # Get the toolkit.
-    if ETSConfig.toolkit:
-        be = import_toolkit(ETSConfig.toolkit)
-    else:
-        # Toolkits to check for if none is explicitly specified.
-        known_toolkits = ('wx', 'qt4', 'null')
-
-        for tk in known_toolkits:
-            try:
-                be = import_toolkit(tk)
-
-                # In case we have just decided on a toolkit, tell everybody else.
-                ETSConfig.toolkit = tk
-                break
-            except (SystemExit, ImportError):
-                import traceback
-                print >>sys.stderr, ('Warning: Unable to import the %s backend '
-                    'for pyface due to traceback: %s\n') % (tk,
-                    traceback.format_exc().strip().replace('\n', '\n\t'))
-
-        else:
-            # Try to import the null toolkit but don't set the ETSConfig toolkit
-            try:
-                be = import_toolkit('null')
-                print >>sys.stderr, ("Info: Unable to import any backend (%s) "
-                    "for pyface; using the 'null' toolkit instead.\n") % ", ".join(known_toolkits)
-            except:
-                raise ImportError("Unable to import a pyface backend for any "
-                    "of the %s toolkits" % ", ".join(known_toolkits))
-
-
-    # Save the imported toolkit module.
+    ETSConfig.toolkit = 'qt4'
+    be = import_toolkit(ETSConfig.toolkit)
     global _toolkit_backend
     _toolkit_backend = be
 
