@@ -120,6 +120,7 @@ def get_app_qt4(*args, **kwargs):
 
 def is_event_loop_running_qt4(app=None):
     """Is the qt4 event loop running."""
+    from pyface.qt import QtGui
     app = QtGui.QApplication.instance()
     if app is None:
         return False
