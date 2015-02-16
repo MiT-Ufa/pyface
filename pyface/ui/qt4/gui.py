@@ -110,6 +110,10 @@ class GUI(MGUI, HasTraits):
         self.set_trait_later(self, "started", True)
 
         logger.debug("---------- starting GUI event loop ----------")
+
+        import traceback
+        traceback.print_stack()
+
         start_event_loop_qt4()
 
         self.started = False

@@ -120,13 +120,10 @@ def get_app_qt4(*args, **kwargs):
 
 def is_event_loop_running_qt4(app=None):
     """Is the qt4 event loop running."""
+    app = QtGui.QApplication.instance()
     if app is None:
-        app = get_app_qt4([''])
-    if hasattr(app, '_in_event_loop'):
-        return app._in_event_loop
-    else:
-        # Does qt4 provide a other way to detect this?
         return False
+    return True
 
 def start_event_loop_qt4(app=None):
     """Start the qt4 event loop in a consistent manner."""
