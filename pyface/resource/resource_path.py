@@ -46,7 +46,9 @@ def resource_path(level = 2):
     if module != '__main__':
         # Return the path to the module:
         try:
-            return dirname(getattr(sys.modules.get(module), '__file__'))
+            dirname_ = dirname(getattr(sys.modules.get(module), '__file__'))
+            dirname_ = dirname_.decode(sys.getfilesystemencoding())
+            return dirname_
         except:
             # Apparently 'module' is not a registered module...treat it like
             # '__main__':
